@@ -596,14 +596,11 @@ function bs_admin_scripts() {
 //  ████████▀    ▀██████▀   ████████▀     ██████████  
 
 function bs_shortcode($atts = [], $content = null, $tag = '') {
-	$name = $content;
-	$items = [];
-
 	ob_start();
 
-	if ($name) {
+	if ($content) {
 		$svg = get_posts([
-			'name' => $name,
+			'name' => $content,
 			'post_type'   => 'svg',
 			'post_status' => 'publish',
 			'numberposts' => 1
