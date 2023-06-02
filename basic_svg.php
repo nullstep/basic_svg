@@ -541,42 +541,6 @@ function bs_set_current_menu($parent_file) {
 	return $parent_file;
 }
 
-//     ▄████████  ████████▄     ▄▄▄▄███▄▄▄▄     ▄█   ███▄▄▄▄▄    
-//    ███    ███  ███   ▀███  ▄██▀▀▀███▀▀▀██▄  ███   ███▀▀▀▀██▄  
-//    ███    ███  ███    ███  ███   ███   ███  ███▌  ███    ███  
-//    ███    ███  ███    ███  ███   ███   ███  ███▌  ███    ███  
-//  ▀███████████  ███    ███  ███   ███   ███  ███▌  ███    ███  
-//    ███    ███  ███    ███  ███   ███   ███  ███   ███    ███  
-//    ███    ███  ███   ▄███  ███   ███   ███  ███   ███    ███  
-//    ███    █▀   ████████▀    ▀█   ███   █▀   █▀     ▀█    █▀   
-
-function bs_admin_scripts() {
-	global $current_screen, $userdata;
-
-/*	
-
-	if ($current_screen === null) {
-		return;
-	}
-	if ($current_screen->base == 'toplevel_page_' . _PLUGIN_BASIC_SVG . '-menu') {
-		wp_enqueue_code_editor(['type' => 'application/x-httpd-php']);
-	}
-	if ($current_screen->id == 'edit-svg') {
-		$boo = microtime(false);
-		wp_enqueue_script('jquery');
-		wp_enqueue_script('jquery-ui-sortable');
-		wp_register_script('bb', _URL_BASIC_SVG . '/' . _PLUGIN_BASIC_SVG . '.js?' . $boo, ['jquery']);
-		wp_localize_script('bb', 'bb', [
-			'post_type' => $current_screen->post_type,
-			'archive_sort_nonce' => wp_create_nonce('bs_archive_sort_nonce_' . $userdata->ID) 
-		]);
-		wp_enqueue_script('bb');
-	}
-
-*/
-
-}
-
 //     ▄████████     ▄█    █▄      ▄██████▄      ▄████████      ███      
 //    ███    ███    ███    ███    ███    ███    ███    ███  ▀█████████▄  
 //    ███    █▀     ███    ███    ███    ███    ███    ███     ▀███▀▀██  
@@ -648,7 +612,6 @@ define('_BS', _bsSettings::get_settings());
 
 add_action('init', 'bs_init');
 add_action('admin_head', 'bs_admin_styling');
-add_action('admin_enqueue_scripts', 'bs_admin_scripts');
 add_action('add_meta_boxes', 'bs_add_metaboxes');
 add_action('save_post', 'bs_save_postdata');
 
