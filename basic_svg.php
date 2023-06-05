@@ -577,9 +577,17 @@ function bs_set_current_menu($parent_file) {
 function bs_shortcode($atts = [], $content = null, $tag = '') {
 	ob_start();
 
-	if ($content) {
+	if (strpos($content, ',') !== FALSE) {
+		$array = explode(',', $content);
+		$name = $array[rand(0, count($array) - 1)];
+	}
+	else {
+		$name = $content;
+	}
+
+	if ($name) {
 		$svg = get_posts([
-			'name' => $content,
+			'name' => $name,
 			'post_type'   => 'svg',
 			'post_status' => 'publish',
 			'numberposts' => 1
