@@ -417,8 +417,7 @@ function bs_svg_metabox($post) {
 	$prefix = '_bs-svg_';
 	$keys = [
 		'pid',
-		'code',
-		'colour'
+		'code'
 	];
 	foreach ($keys as $key) {
 		$$key = get_post_meta($post->ID, $prefix . $key, true);
@@ -427,33 +426,30 @@ function bs_svg_metabox($post) {
 	?>
 	<style>
 		#bs_meta_box label {
-			display: inline-block;
-			width: 20%;
+			display: block;
 			font-weight: 700;
-			padding-top: 4px;
+			padding: 4px 0 0;
 		}
 		#bs_meta_box input,
 		#bs_meta_box select,
 		#bs_meta_box textarea,
 		#bs_meta_box span.preview {
 			box-sizing: border-box;
-			display: inline-block;
-			width: 53%;
-			padding: 3px;
+			display: block;
 			vertical-align: middle;
 			margin-top: 10px;
 			float: none;
 		}
 		#bs_meta_box span.desc {
 			display: block;
-			width: 18%;
-			padding-top: 6px;
+			padding: 6px 0;
 			clear: both;
 			font-style: italic;
 			font-size: 12px;
 		}
 		#bs_meta_box span.preview img {
 			max-width: 100%;
+			height: 100px;
 		}
 		#bs_meta_box div.middle {
 			margin-bottom: 10px;
@@ -471,23 +467,23 @@ function bs_svg_metabox($post) {
 			padding-bottom: 0;
 			border-bottom: 0;
 		}
+		.CodeMirror {
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			margin-bottom: 10px;
+		}
 	</style>
 	<div class="inside">
 		<div class="top">
 			<label>Code:</label>
-			<input type="hidden" id="bs-svg-pid" name="_bs-svg_pid" value="<?php echo $pid; ?>">
-			<textarea id="bs-svg-code" name="_bs-svg_code"><?php echo $code; ?></textarea>
 			<span class="desc">Markup for this SVG</span>
-		</div>
-		<div class="middle">
-			<label>Preview:</label>
-			<span class="preview"><img id="bs-preview" src="" style="height:64px"></span>
-			<span class="desc">Preview of this SVG</span>
+			<input type="hidden" id="bs-svg-pid" name="_bs-svg_pid" value="<?php echo $pid; ?>">
+			<textarea id="bs-svg-code" class="code" name="_bs-svg_code"><?php echo $code; ?></textarea>
 		</div>
 		<div class="bottom">
-			<label>Colour:</label>
-			<input type="text" id="bs-svg-colour" name="_bs-svg_colour" value="<?php echo $colour; ?>">
-			<span class="desc">Fill colour for this SVG (if applicable)</span>
+			<label>Preview:</label>
+			<span class="desc">Preview of this SVG</span>
+			<span class="preview"><img id="bs-preview" src=""></span>
 		</div>
 	</div>
 	<script>
@@ -500,6 +496,26 @@ function bs_svg_metabox($post) {
 				preview();
 			});
 			preview();
+			editors = ['bs-svg-code'];
+			editors.forEach(function(item, index, arr) {
+				var eid = $('#' + item);
+				if (eid.length) {
+					var es = wp.codeEditor.defaultSettings ? _.clone(wp.codeEditor.defaultSettings) : {};
+					es.codemirror = _.extend(
+						{},
+						es.codemirror, {
+							indentUnit: 2,
+							tabSize: 2,
+							mode: 'css'
+						}
+					);
+					var editor = wp.codeEditor.initialize(item, es);
+					editor.codemirror.on('change', function(cMirror) {
+						editor.codemirror.save();
+						eid.change();
+					});
+				}
+			});
 		});
 	</script>
 <?php
@@ -509,8 +525,7 @@ function bs_save_postdata($post_id) {
 	$prefix = '_bs-svg_';
 	$keys = [
 		'pid',
-		'code',
-		'colour'
+		'code'
 	];
 	foreach ($keys as $key) {
 		if (array_key_exists($prefix . $key, $_POST)) {
@@ -584,10 +599,18 @@ function bs_shortcode($atts = [], $content = null, $tag = '') {
 // some admin styling
 
 function bs_admin_styling() {
-	if (get_current_screen()->id == 'edit-svg') {
+	if (get_current_screen()->post_type == 'svg') {
 		echo '<style>';
 			echo '';
 		echo '</style>';
+	}
+}
+
+// add admin scripts
+
+function bs_add_scripts($hook) {
+	if (get_current_screen()->post_type == 'svg') {
+		wp_enqueue_code_editor(['type' => 'application/x-httpd-php']);
 	}
 }
 
@@ -612,6 +635,7 @@ define('_BS', _bsSettings::get_settings());
 
 add_action('init', 'bs_init');
 add_action('admin_head', 'bs_admin_styling');
+add_action('admin_enqueue_scripts', 'bs_add_scripts');
 add_action('add_meta_boxes', 'bs_add_metaboxes');
 add_action('save_post', 'bs_save_postdata');
 
