@@ -542,14 +542,10 @@ function bs_save_postdata($post_id) {
 
 function bs_set_current_menu($parent_file) {
 	global $submenu_file, $current_screen, $pagenow;
-	$taxonomy = 'banner';
 
-	if ($current_screen->id == 'edit-' . $taxonomy) {
+	if (in_array($current_screen->id, ['edit-svg', 'svg'])) {
 		if ($pagenow == 'post.php') {
 			$submenu_file = 'edit.php?post_type=' . $current_screen->post_type;
-		}
-		if ($pagenow == 'edit-tags.php') {
-			$submenu_file = 'edit-tags.php?taxonomy=' . $taxonomy . '&post_type=' . $current_screen->post_type;
 		}
 		$parent_file = _PLUGIN_BASIC_SVG . '-menu';
 	}
