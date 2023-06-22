@@ -1,19 +1,14 @@
-// basic_banner admin script
+// basic_svg admin script
 
 jQuery(function($) {
-	if ($('#basic_banner-wrap').length > 0) {
+	if ($('#basic_svg-wrap').length > 0) {
 		// config
-		const id = 'basic_banner';
-		const plugin = basic_banner;
+		const id = 'basic_svg';
+		const plugin = basic_svg;
 		const fields = [
-			'bb_active',
-			'bb_indent',
-			'bb_css',
-			'bb_js'
+			'bs_active'
 		];
 		const editors = [
-			'bb_css',
-			'bb_js'
 		];
 		// let's go
 		var cm = [];
