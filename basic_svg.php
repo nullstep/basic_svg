@@ -2,11 +2,11 @@
 
 /*
  * Plugin Name: basic_svg
- * Plugin URI: https://xayrin.com/plugins
- * Description: Make SVGs available
- * Author: Scott A. Dixon
- * Author URI: https://xayrin.com
- * Version: 1.0.0
+ * Plugin URI: https://localhost/plugins
+ * Description: make svgs available
+ * Author: nullstep
+ * Author URI: https://localhost
+ * Version: 1.0.1
  */
 
 defined('ABSPATH') or die('⎺\_(ツ)_/⎺');
@@ -439,6 +439,10 @@ function bs_svg_metabox($post) {
 			vertical-align: middle;
 			margin-top: 10px;
 			float: none;
+			background: #fff;
+		}
+		#bs_meta_box span.preview:hover {
+			background: #000;
 		}
 		#bs_meta_box span.desc {
 			display: block;
@@ -488,8 +492,10 @@ function bs_svg_metabox($post) {
 	</div>
 	<script>
 		jQuery(document).ready(function($) {
+			var noimg = btoa('<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><style>#no-img path{fill:#3f3f3f}</style><g id="no-img"><path d="M2.3,24.3c0-0.6,0-1.1,0-1.6h0.9l0.1,1h0c0.3-0.6,1-1.1,1.9-1.1c0.8,0,2.1,0.5,2.1,2.5v3.5H6.2v-3.3c0-0.9-0.3-1.7-1.3-1.7c-0.7,0-1.2,0.5-1.4,1.1c0,0.1-0.1,0.3-0.1,0.5v3.5H2.3V24.3z"/><path d="M14.2,25.6c0,2.1-1.5,3.1-2.9,3.1c-1.6,0-2.8-1.2-2.8-3c0-1.9,1.3-3.1,2.9-3.1C13.1,22.6,14.2,23.8,14.2,25.6zM9.6,25.6c0,1.3,0.7,2.2,1.8,2.2c1,0,1.8-0.9,1.8-2.3c0-1-0.5-2.2-1.7-2.2C10.2,23.4,9.6,24.5,9.6,25.6z"/><path d="M19.3,21.1c0,0.4-0.3,0.6-0.7,0.6c-0.4,0-0.6-0.3-0.6-0.6c0-0.4,0.3-0.7,0.7-0.7C19,20.4,19.3,20.7,19.3,21.1zM18.1,28.5v-5.8h1.1v5.8H18.1z"/><path d="M20.9,24.3c0-0.6,0-1.1,0-1.6h0.9l0,0.9h0c0.3-0.6,0.9-1.1,1.8-1.1c0.8,0,1.4,0.5,1.6,1.2h0c0.2-0.3,0.4-0.6,0.6-0.8c0.3-0.3,0.7-0.4,1.3-0.4c0.8,0,1.9,0.5,1.9,2.5v3.4h-1v-3.3c0-1.1-0.4-1.8-1.3-1.8c-0.6,0-1.1,0.4-1.2,1c0,0.1-0.1,0.3-0.1,0.5v3.6h-1V25c0-0.9-0.4-1.6-1.2-1.6c-0.7,0-1.1,0.5-1.3,1.1C22,24.7,22,24.8,22,25v3.5h-1V24.3z"/><path d="M34.1,28.5l-0.1-0.7h0c-0.3,0.5-0.9,0.9-1.8,0.9c-1.2,0-1.8-0.8-1.8-1.7c0-1.4,1.2-2.2,3.5-2.2v-0.1c0-0.5-0.1-1.3-1.3-1.3c-0.5,0-1.1,0.2-1.5,0.4l-0.2-0.7c0.5-0.3,1.2-0.5,1.9-0.5c1.8,0,2.2,1.2,2.2,2.4v2.2c0,0.5,0,1,0.1,1.4H34.1z M34,25.6c-1.2,0-2.5,0.2-2.5,1.3c0,0.7,0.5,1,1,1c0.8,0,1.2-0.5,1.4-1c0-0.1,0.1-0.2,0.1-0.3V25.6z"/><path d="M41.7,22.7c0,0.4,0,0.9,0,1.6v3.4c0,1.3-0.3,2.1-0.8,2.7c-0.6,0.5-1.4,0.7-2.1,0.7c-0.7,0-1.5-0.2-1.9-0.5l0.3-0.8c0.4,0.2,1,0.5,1.7,0.5c1.1,0,1.9-0.6,1.9-2v-0.6h0c-0.3,0.5-0.9,1-1.8,1c-1.4,0-2.5-1.2-2.5-2.8c0-2,1.3-3.1,2.6-3.1c1,0,1.6,0.5,1.8,1h0l0-0.9H41.7z M40.6,25c0-0.2,0-0.3-0.1-0.5c-0.2-0.6-0.7-1.1-1.5-1.1c-1,0-1.7,0.9-1.7,2.2c0,1.1,0.6,2.1,1.7,2.1c0.6,0,1.2-0.4,1.5-1.1c0.1-0.2,0.1-0.4,0.1-0.6V25z"/><path d="M44,25.8c0,1.4,0.9,2,2,2c0.8,0,1.2-0.1,1.6-0.3l0.2,0.8c-0.4,0.2-1,0.4-1.9,0.4c-1.8,0-2.9-1.2-2.9-2.9c0-1.8,1-3.1,2.7-3.1c1.9,0,2.4,1.7,2.4,2.7c0,0.2,0,0.4,0,0.5H44z M47.1,25.1c0-0.7-0.3-1.7-1.5-1.7c-1.1,0-1.5,1-1.6,1.7H47.1z"/></g></svg>');
 			var preview = function() {
-				$('#bs-preview').attr('src', 'data:image/svg+xml;base64,' + btoa($('#bs-svg-code').val()));
+				var bsf = btoa($('#bs-svg-code').val());
+				$('#bs-preview').attr('src', 'data:image/svg+xml;base64,' + (bsf || noimg));
 			}
 			var markup = $('#bs-svg-code');
 			markup.on('change', function() {
@@ -571,7 +577,11 @@ function bs_set_current_menu($parent_file) {
 //  ████████▀    ▀██████▀   ████████▀     ██████████  
 
 function bs_shortcode($atts = [], $content = null, $tag = '') {
-	ob_start();
+	$code = '';
+	$a = shortcode_atts([
+        'width' => '',
+        'height' => ''
+    ], $atts);
 
 	if (strpos($content, ',') !== FALSE) {
 		$array = explode(',', $content);
@@ -583,7 +593,7 @@ function bs_shortcode($atts = [], $content = null, $tag = '') {
 
 	if ($name) {
 		$svg = get_posts([
-			'name' => $name,
+			'post_name' => $name,
 			'post_type'   => 'svg',
 			'post_status' => 'publish',
 			'numberposts' => 1
@@ -592,12 +602,12 @@ function bs_shortcode($atts = [], $content = null, $tag = '') {
 		$id = $svg[0]->ID;
 		$pid = get_post_meta($id, '_bs-svg_pid', true);
 		$code = get_post_meta($id, '_bs-svg_code', true);
-		$colour = get_post_meta($id, '_bs-svg_colour', true);
-
-		echo $code;
 	}
 
-	return ob_get_clean();
+	$width = ($a['width']) ? ' width="' . $a['width'] . '"' : '';
+	$height = ($a['height']) ? ' height="' . $a['height'] . '"' : '';
+
+	return str_replace('<svg', '<svg' . $width . $height, $code);
 }
 
 // some admin styling
@@ -673,7 +683,5 @@ add_action('rest_api_init', function() {
 //    ███    ███      ███    █▄   ███          ███         
 //    ███    ███      ███    ███  ███▌    ▄    ███         
 //    ███    █▀       ██████████  █████▄▄██   ▄████▀
-
-
 
 // eof
