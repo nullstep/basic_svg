@@ -202,6 +202,16 @@ class _bsMenu {
 			30
 		);
 
+		// add config submenu
+
+		add_submenu_page(
+			$this->slug,
+			'Configuration',
+			'Configuration',
+			'manage_options',
+			$this->slug
+		);
+
 		// add posts menus
 
 		$types = [
@@ -211,8 +221,8 @@ class _bsMenu {
 		foreach ($types as $type) {
 			add_submenu_page(
 				$this->slug,
-				$type . 's',
-				$type . 's',
+				'SVGs',
+				'SVGs',
 				'manage_options',
 				'/edit.php?post_type=' . $type
 			);
