@@ -616,7 +616,11 @@ function bs_shortcode($atts = [], $content = null, $tag = '') {
 		$width = ($a['width']) ? ' width="' . $a['width'] . '"' : '';
 		$height = ($a['height']) ? ' height="' . $a['height'] . '"' : '';
 
-		$svg = str_replace('<svg', '<svg id="' . sanitize_title($name) . '" ' . $width . $height, $code);
+		$svg = str_replace(
+			['<svg', "\n", "\r"],
+			['<svg id="' . sanitize_title($name) . '" ' . $width . $height, '', ''],
+			$code
+		);
 
 		if ($a['wide'] == 'yes') {
 			if (class_exists('B')) {
